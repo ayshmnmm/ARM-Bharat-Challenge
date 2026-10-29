@@ -1,0 +1,220 @@
+0:11
+Welcome to the second edition of Bhat AI SOC challenge officially launched by ARM
+0:18
+and Ministry of IT at Semicon India. This challenge marks our continuation of
+0:25
+our commitment to foster innovation in AI and semiconductor design in India.
+0:31
+Supported by the UK government through the UK India technology and security
+0:37
+initiative with IIT Delhi as the lead mentor institute. The challenge offers
+0:43
+exciting opportunities to transform bold ideas into real working solutions. We're
+0:50
+also excited to have Meta on board. Together we have crafted industry
+0:55
+relevant problem statements that reflect the real world challenges and
+1:01
+opportunities. This addition is open to students,
+1:05
+developers and working professionals which brings together diverse talent to
+1:10
+innovate, collaborate and push the boundaries of what is possible.
+1:16
+My sincere thanks to all our partners, Ministry of IT, UK government, Meta and
+1:22
+IT Delhi for their support and commitment in making this initiative a
+1:26
+success. I would also like to wish all the
+1:30
+participants the very best and I look forward to seeing innovative ideas and
+1:36
+solutions that emerge from this challenge. All the very best. Thank you
+1:40
+very much. Hello everyone and welcome to walk
+1:50
+through of the problem statement 3 of the VAT AI SOC challenge 202627.
+1:57
+I am Dr. Vijay Kumar MS and PhD from IIT Delhi. My research focus on the
+2:02
+affordable digital healthcare cyber physical security as AI and the device
+2:07
+fingerprinting. Today I'll explore how to build a AI powered digital safety
+2:12
+assistant that runs directly on the device. Online threat are increasing and
+2:18
+it is not always easy for user to identify fishing link scams or unusual
+2:24
+network activity. Our goal is simple. Detect threat on the device. Explain the
+2:31
+risk in easy language and help user stay safe without sending their personal data
+2:38
+to the cloud. Let's first understand the problem and
+2:48
+our goal. The security threat mainly comes from the three sources. Network
+2:52
+traffic, fishing links and the escape message. Traditional security tool often
+2:57
+so the complex alert and the technical locks that are difficult for ordinary
+3:02
+user to understand. Therefore our goal is to build a simple AI assistant with
+3:08
+the five key features. First network monitoring to detect the unusual device
+3:13
+or the network activity. Second fishing detection to identify the suspicious or
+3:18
+the fake link. Third, the scam message detection to identify the fraudulent
+3:24
+messages and financial scam. Fourth, simple explanation to help users
+3:32
+understand why something may be dangerous.
+3:36
+And the fifth recommended action to guide users on what to do next, such as
+3:43
+avoiding a suspicious link or verifying a message. The key requirement is that
+3:50
+the system must run locally on ARMbased hardware and continue working without an
+3:56
+internet connection. Now that we understand our goal, let's
+4:06
+see why processing everything on the single device is important. There are
+4:12
+three main benefit. Privacy, speed, and the reliability. First, privacy.
+4:17
+Sensitive message and the network data stay on the device instead of being sent
+4:22
+to the cloud. Second, the speed. The system can detect the threat and respond
+4:28
+quickly without depending on the internet connection. Third, reliability.
+4:33
+It continue working even when the internet is unavailable. However, as
+4:38
+device have the limited memory, processing power, battery capacity. So
+4:43
+we need lightweight and the efficient AI model that run reliably without the
+4:49
+overheating the device. The goal is to build a fast, secure and the reliable
+4:55
+system that works entirely on the device.
+5:11
+This slide show the basic workflow of our proposed solution for problem
+5:16
+statement three. The system takes input from the SMS message URLs and the
+5:21
+network traffic. First, it extract the useful feature from the data. Next,
+5:28
+lightweight rules or machine learning models check for the possible threat.
+5:33
+The risk fusion model combine the detection results and send it evidence
+5:38
+to the llama or the language model running through the actuar
+5:43
+lama that explain the risk in the simple language and suggest what the user
+5:48
+should do. The key point is that the specialist model detect the threat while
+5:55
+the language model explain them and recommended action. This makes the
+6:02
+system more efficient and easier for the user to understand.
+6:11
+To build this AI based system in problem statement three, you must use the
+6:16
+required technology. Use the lama family model to reasoning and the exotoise to
+6:22
+run it locally on the device. If your hardware include the Helio neural
+6:28
+processing unit, use Helio RT to run the compatible machine learning models on
+6:34
+the neural processing unit while running the lama through the extra on the ARM
+6:39
+CPU. During this whole implementation, keep
+6:43
+the both pipelines separate and ensure the system work without the internet
+6:48
+access. Now let's discuss the use case for your
+7:04
+experiment or demo. Do not try to build everything at once. Focus on the one
+7:11
+working solution. You can choose one of the three option. Option A, detect the
+7:15
+SMS scam using some publicly available data set. Option B, detect the fishing
+7:20
+URL using the available thread feeds. Option C, monitor the home network
+7:24
+traffic for the unusual activity. Choose one main use case and make it the more
+7:30
+properly keep the code model so you can add other features later.
+7:41
+Let's look at the simple example of how the system work. Suppose a message
+7:45
+arrives saying the account locked. verify. Now the system detect the
+7:50
+urgency and the suspicious link language model. Then explain why the message may
+7:56
+be a ex scam and advise the user not to click the link but to verify through the
+8:02
+official website or app. The goal is to guide the user in the
+8:08
+making the safer decision. The system should never automatically click link or
+8:12
+claim that it prediction are always correct.
+8:21
+Now let's discuss how we will evaluate the system. We'll focus on the three key
+8:27
+areas. First detection quality, second ondevice performance and third is user
+8:33
+effectiveness. In the detection quality, how accurately does the device or your
+8:38
+system detect the threat and how often does it raise a false alarm?
+8:44
+In the ondevice performance, we'll see the how quickly the response and the how
+8:50
+much memory does it use while running offline. In the third case,
+8:56
+user effectiveness. Basically, we will see the can ordinary user understand the
+9:02
+explanation and follow the recommended action.
+9:06
+These three areas will help us measure the system accuracy, performance and the
+9:12
+practical usefulness. Now let's discuss the target hardware.
+9:23
+Test your system on the actual device such as the Android phone, Raspberry Pi
+9:27
+5, Raspberry Pi 5 with an AI hat or another ARM based Linux device.
+9:35
+Do not rely on the laptop simulation. Choose the hardware based on your use
+9:40
+case and the available resources. also clearly show where the each model runs.
+9:46
+If you use an AI accelerator, specify which models run on the accelator such
+9:53
+as NPU and which run on the CPU. The goal is to demonstrate the system runs
+9:59
+locally on the actual hardware even without any internet connection.
+10:10
+Let's go through the key deliverable for the submission. First, source code.
+10:14
+Upload your complete code to the GitHub with the clear setup instruction.
+10:18
+Second, working application. Provide a compile version that runs on your target
+10:23
+device such as an Android APK or a Linux execute one. Third, the demo video.
+10:29
+Record an in demonstration showing thread detection on the actual device
+10:35
+working offline. For the technical report, document your hardware setup,
+10:39
+model configuration and measure performance in in your report. For the
+10:45
+phase one, the submission deadline is 23rd November 2020. You must submit your
+10:50
+source code, working application, offline demo video, and the technical
+10:54
+report. The phase two proof of concept is due on the 5th February 2021. Please
+11:01
+check the official challenge website regularly for the any for update. If you
+11:06
+face any technical issue or have a question about your problem statement,
+11:10
+contact the mentor for your support. Thank you and the good luck.
