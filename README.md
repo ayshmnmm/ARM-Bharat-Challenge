@@ -2,7 +2,7 @@
 
 Our team repo for the **Bharat AI-SoC Challenge 2026–27**, PS3: *Cybersecurity & Digital Safety: on-device threat detection, clear explanations, and actionable protection*.
 
-> **Status:** planning. See **[PLAN.md](PLAN.md)** for the full build plan, timeline and evaluation strategy.
+> **Status:** planning.
 
 ## What we're building
 
@@ -76,13 +76,10 @@ For every benchmark we record: **device/OS • model & quantisation • ExecuTor
 ## Repo layout
 
 ```
-├── PLAN.md            # build plan, timeline, evaluation
 ├── docs/              # official challenge material (brief PDF, video transcript)
 └── assets/
     └── docs/          # slide screenshots used in this README
 ```
-
-The code layout is proposed in [PLAN.md](PLAN.md#6-proposed-repo-structure).
 
 ## Team
 
