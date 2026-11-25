@@ -1,0 +1,386 @@
+[
+  {
+    "group": "full scan",
+    "scenario": "1000 ports on the router in 10 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 1000,
+    "hosts": 1,
+    "probes": 1000,
+    "spread_s": 10,
+    "probes_flagged_by_ml": 698,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 1 device, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 10,
+    "hosts": 1,
+    "probes": 10,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 5,
+    "rules": [],
+    "ml": []
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 2 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 10,
+    "hosts": 2,
+    "probes": 20,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 10,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 3 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 10,
+    "hosts": 3,
+    "probes": 30,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 15,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 5 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 10,
+    "hosts": 5,
+    "probes": 50,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 25,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 9 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 10,
+    "hosts": 9,
+    "probes": 90,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 45,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 9 devices, spread over 10 min",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 10,
+    "hosts": 9,
+    "probes": 90,
+    "spread_s": 600,
+    "probes_flagged_by_ml": 45,
+    "rules": [],
+    "ml": []
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 1 device, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 20,
+    "hosts": 1,
+    "probes": 20,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 13,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 2 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 20,
+    "hosts": 2,
+    "probes": 40,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 26,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 3 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 20,
+    "hosts": 3,
+    "probes": 60,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 39,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 5 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 20,
+    "hosts": 5,
+    "probes": 100,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 65,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 9 devices, within 20 s",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 20,
+    "hosts": 9,
+    "probes": 180,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 117,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 9 devices, spread over 10 min",
+    "technique": "SYN scan (-sS)",
+    "ports_per_host": 20,
+    "hosts": 9,
+    "probes": 180,
+    "spread_s": 600,
+    "probes_flagged_by_ml": 117,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "full scan",
+    "scenario": "1000 ports on the router in 10 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 1000,
+    "hosts": 1,
+    "probes": 1000,
+    "spread_s": 10,
+    "probes_flagged_by_ml": 698,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 1 device, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 10,
+    "hosts": 1,
+    "probes": 10,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 5,
+    "rules": [],
+    "ml": []
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 2 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 10,
+    "hosts": 2,
+    "probes": 20,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 10,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 3 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 10,
+    "hosts": 3,
+    "probes": 30,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 15,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 5 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 10,
+    "hosts": 5,
+    "probes": 50,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 25,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 9 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 10,
+    "hosts": 9,
+    "probes": 90,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 45,
+    "rules": [],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 10 ports on 9 devices, spread over 10 min",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 10,
+    "hosts": 9,
+    "probes": 90,
+    "spread_s": 600,
+    "probes_flagged_by_ml": 45,
+    "rules": [],
+    "ml": []
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 1 device, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 20,
+    "hosts": 1,
+    "probes": 20,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 13,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 2 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 20,
+    "hosts": 2,
+    "probes": 40,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 26,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 3 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 20,
+    "hosts": 3,
+    "probes": 60,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 39,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 5 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 20,
+    "hosts": 5,
+    "probes": 100,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 65,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 9 devices, within 20 s",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 20,
+    "hosts": 9,
+    "probes": 180,
+    "spread_s": 20,
+    "probes_flagged_by_ml": 117,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  },
+  {
+    "group": "lateral",
+    "scenario": "nmap top 20 ports on 9 devices, spread over 10 min",
+    "technique": "connect scan (-sT)",
+    "ports_per_host": 20,
+    "hosts": 9,
+    "probes": 180,
+    "spread_s": 600,
+    "probes_flagged_by_ml": 117,
+    "rules": [
+      "port_scan"
+    ],
+    "ml": [
+      "ml_scan"
+    ]
+  }
+]
