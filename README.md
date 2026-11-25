@@ -1,95 +1,50 @@
-# ARM-Bharat-Challenge
+# NetWatch
 
-Our team repo for the **Bharat AI-SoC Challenge 2026–27**, PS3: *Cybersecurity & Digital Safety: on-device threat detection, clear explanations, and actionable protection*.
+Offline AI guardian for a home Wi-Fi network, running on the router itself (Raspberry Pi 4, Arm Cortex-A72).
+Bharat AI-SoC Challenge 2026–27, Problem Statement 3: on-device threat, phishing & scam detection.
 
-> **Status:** planning.
+NetWatch watches the Wi-Fi side of the router, identifies every device, and detects intrusions and visits to
+known phishing/malware sites with two independent methods: fixed rules plus threat lists, and a machine-learning
+flow classifier trained on CIC-IDS2017. Each alert is then explained for non-experts by Llama 3.2 1B running
+on the Pi through ExecuTorch, written from grounded, fact-checked facts. Nothing leaves the home.
 
-## What we're building
+Built with Llama. Llama 3.2 is licensed under the [Llama 3.2 Community License](https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/LICENSE),
+Copyright © Meta Platforms, Inc. All Rights Reserved. The model weights are not in this repository.
 
-A **home-network safety assistant on a Raspberry Pi 5**. Devices connect through the Pi. It watches traffic metadata, flags suspicious activity, and tells the household **what happened, why it matters, how sure it is, and what to do next**, all in plain language. Everything runs on the Pi with no cloud, and it keeps working with the internet unplugged.
+- [Architecture as built](docs/ARCHITECTURE.md)
 
-This is **Option C (Network)** from the problem statement. The design is modular, so other inputs can be added later. Phishing-domain checks on the DNS lookups we already see (Option B) are the natural next step.
+## Quick start (offline replay)
 
-![PS3 core capabilities](assets/docs/ps3-01-core-capabilities.png)
-
-## How it works
-
-We follow the reference pipeline from the problem statement:
-
-![Reference architecture: Collect → Analyse → Detect → Risk Fusion → Explain/Recommend](assets/docs/ps3-03-reference-architecture.png)
-
-| Stage | What it does in our system | Runs on |
-|---|---|---|
-| **Collect** | Capture flow/packet metadata (plus DNS, ARP and DHCP events) from devices on the Pi's network | Pi CPU |
-| **Analyse** | Aggregate packets into flows and extract features (ports, rates, sizes, timing, destinations) | Pi CPU |
-| **Detect** | Rules for known-bad patterns (port scans, brute force, ARP spoofing, new devices, bad domains) and a small ML flow classifier/anomaly model | Pi CPU, or Hailo NPU if we use the AI HAT |
-| **Risk fusion** | Combine detector outputs into one risk score + threshold, de-duplicate, build a structured evidence record | Pi CPU |
-| **Explain & recommend** | **Llama (via ExecuTorch)** turns the evidence into a short explanation and next steps | Pi Arm CPU |
-| **User action** | Local web UI: read the alert, take action (verify / disconnect / block, always user-confirmed), dismiss or report as feedback | Pi CPU |
-
-**The key design rule:** detectors decide *whether* something is a threat. Llama only *explains* the evidence and suggests actions. It is never the detector, and the system never acts automatically or claims certainty from the LLM alone.
-
-![Detect → explain → recommend → verify](assets/docs/ps3-06-user-journey.png)
-
-## Challenge requirements (from the PS3 brief)
-
-**Mandatory**
-- A **Llama-family model**, run **on-device with ExecuTorch**
-- Runs on **real Arm hardware**. Benchmark on the target device, not a laptop or cloud notebook
-- Works **fully offline**
-- Pick **one primary use case** and keep the architecture extensible
-
-**Optional accelerator.** If we use a Pi 5 + AI HAT, Hailo-compatible models run on the NPU via **HailoRT**, while Llama stays on the Arm CPU via ExecuTorch. These are **two separate pipelines**, and we document which model runs where.
-
-![Required technology](assets/docs/ps3-04-required-technology.png)
-
-**Target hardware:** Raspberry Pi 5 (CPU-only baseline first; AI HAT is a stretch goal).
-
-![Target hardware](assets/docs/ps3-08-target-hardware.png)
-
-## How we'll be evaluated
-
-| Area | Metrics |
-|---|---|
-| **Detection quality** | Precision, recall, false-positive rate, detection latency across threat types |
-| **On-device performance** | Inference time, memory use, CPU/accelerator load, operation without internet |
-| **User effectiveness** | Clarity of explanations, action completion, user understanding of risk |
-
-For every benchmark we record: **device/OS • model & quantisation • ExecuTorch version • latency • memory • offline test**.
-
-![Evaluation and milestones](assets/docs/ps3-07-evaluation-milestones.png)
-
-## Deliverables
-
-1. **Source code:** this repo, with step-by-step setup scripts
-2. **On-device app:** a compiled build for Linux (Python wheel or binary)
-3. **Demo video:** end-to-end live walkthrough on the Pi, offline, with real threat triggers
-4. **Engineering report:** hardware mapping, quantisation settings, measured KPIs
-
-## Key dates
-
-| Milestone | Date |
-|---|---|
-| Phase 1: Open qualifying submission | **23 Nov 2026** |
-| Phase 2: PoC development submission (if shortlisted) | **5 Feb 2027** |
-
-## Repo layout
-
-```
-├── docs/              # official challenge material (brief PDF, video transcript)
-└── assets/
-    └── docs/          # slide screenshots used in this README
+```bash
+bash setup/install_deps.sh                      # once: Suricata etc. (verifies the router is untouched)
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python lab/make_pcaps.py captures/lab # synthetic attack captures
+.venv/bin/python -m netwatch replay captures/lab/*.pcap
+(cd web && npm ci && npx next build)            # static dashboard -> web/out
+.venv/bin/python -m netwatch serve --host 127.0.0.1
 ```
 
-## Team
+Then from a laptop on the Wi-Fi: `ssh -L 8088:localhost:8088 <user>@192.168.1.1` and open http://localhost:8088.
 
-- Pulkit Singla, Team Leader
-- Akshit Sharma
-- Ayushman Muduli
-- Faculty Mentor: Dr. Sougata Sen
+## ML detector
 
-## Links
+```bash
+# once: CIC-IDS2017 MachineLearningCVE CSVs (~235 MB zip) into var/datasets/cic/
+.venv/bin/python -m netwatch ml-train      # ~3 min on the Pi; writes models/flow_classifier.{joblib,json}
+.venv/bin/python -m netwatch ml-eval       # replays this network's captures, records results in the model card
+```
 
-- [Challenge page](https://arm-education.github.io/Arm-Developer-Labs/Bharat_AI_SoC_2026_27.html): check regularly for Q&A and updates
-- Mentor support: support@armbharatchallenge.com
-- PS3 brief: [`docs/SoC Hackathon Details.pdf`](docs/SoC%20Hackathon%20Details.pdf) · video transcript: [`docs/PS3_Transcript.txt`](docs/PS3_Transcript.txt)
+## Tests
+
+```bash
+.venv/bin/python -m pytest
+```
+
+## Threat feeds
+
+Built on a laptop (the router never downloads anything at runtime), then pushed over Wi-Fi:
+
+```bash
+python -m netwatch feeds-build      # on the laptop
+bash feeds/push_to_pi.sh            # copies the bundle to the Pi
+```
