@@ -1,0 +1,9 @@
+/var/lib/netwatch/sensor/eve.json {
+    daily
+    maxsize 200M
+    rotate 1
+    missingok
+    notifempty
+    copytruncate
+    su netwatch netwatch
+}

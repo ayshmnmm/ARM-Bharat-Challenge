@@ -1,0 +1,51 @@
+# NetWatch dashboard + API on the Wi-Fi address only (192.168.1.1:8088).
+# Kernel-level fence: may only talk to the Wi-Fi LAN and loopback, never the campus side.
+[Unit]
+Description=NetWatch dashboard (wlan0 only)
+After=hostapd.service netwatch-live.service
+
+[Service]
+Type=simple
+User=netwatch
+Group=netwatch
+EnvironmentFile=/opt/netwatch/setup/netwatch.env
+EnvironmentFile=-/etc/netwatch/netwatch.env
+ExecStart=/opt/netwatch/.venv/bin/python -m netwatch serve --host 192.168.1.1 --port 8088 --eve /var/lib/netwatch/sensor/eve.json
+WorkingDirectory=/opt/netwatch
+# 192.168.1.1 only exists once hostapd/wlan0 is up; keep retrying until it does.
+Restart=always
+RestartSec=10
+StateDirectory=netwatch
+
+IPAddressAllow=192.168.1.0/24 127.0.0.0/8 ::1/128
+IPAddressDeny=any
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+CapabilityBoundingSet=
+
+Nice=10
+CPUQuota=50%
+IOWeight=20
+LimitAS=1G
+OOMScoreAdjust=500
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectKernelTunables=yes
+ProtectKernelLogs=yes
+ProtectClock=yes
+ProtectHostname=yes
+PrivateDevices=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RemoveIPC=yes
+SystemCallArchitectures=native
+ReadWritePaths=/var/lib/netwatch
+
+[Install]
+WantedBy=multi-user.target

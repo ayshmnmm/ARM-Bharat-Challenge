@@ -1,0 +1,51 @@
+# NetWatch sensor: Suricata as a passive flow/protocol logger on wlan0 ONLY.
+# No inline/IPS mode, no promiscuous mode, no listening sockets, no access to eth0.
+[Unit]
+Description=NetWatch sensor (Suricata, passive, wlan0 only)
+After=network-online.target hostapd.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=netwatch
+Group=netwatch
+# --af-packet=wlan0 overrides any interface in the config: capture can never start on eth0.
+ExecStart=/usr/bin/suricata -c /opt/netwatch/sensor/suricata.yaml --af-packet=wlan0 --disable-detection -l /var/lib/netwatch/sensor
+Restart=on-failure
+RestartSec=15
+StateDirectory=netwatch netwatch/sensor
+StateDirectoryMode=0750
+
+# Packet capture needs these two capabilities and nothing else.
+AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN
+RestrictAddressFamilies=AF_PACKET AF_NETLINK AF_UNIX
+
+# Router first: low priority, bounded CPU and memory, first in line for the OOM killer.
+Nice=10
+CPUQuota=100%
+IOWeight=20
+LimitAS=1536M
+OOMScoreAdjust=500
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectKernelTunables=yes
+ProtectKernelLogs=yes
+ProtectClock=yes
+ProtectHostname=yes
+PrivateDevices=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RemoveIPC=yes
+SystemCallArchitectures=native
+ReadWritePaths=/var/lib/netwatch
+
+[Install]
+WantedBy=multi-user.target
