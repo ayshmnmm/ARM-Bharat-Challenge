@@ -11,6 +11,7 @@ on the Pi through ExecuTorch, written from grounded, fact-checked facts. Nothing
 Built with Llama. Llama 3.2 is licensed under the [Llama 3.2 Community License](https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/LICENSE),
 Copyright © Meta Platforms, Inc. All Rights Reserved. The model weights are not in this repository.
 
+- [Final project report (PDF)](docs/NetWatch_Final_Report.pdf)
 - [Architecture as built](docs/ARCHITECTURE.md)
 
 ## Quick start (offline replay)
