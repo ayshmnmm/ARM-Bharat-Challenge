@@ -1,0 +1,7 @@
+# name: NetWatch lab test indicators
+# kind: domain
+# category: lab
+# Reserved .test names (RFC 6761) that can never resolve on the internet.
+# Used by lab/ synthetic captures to demo and test feed matching without touching real bad sites.
+netwatch-lab-phish.test
+login-verify-account.netwatch-lab.test

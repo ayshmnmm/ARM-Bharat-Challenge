@@ -1,0 +1,12 @@
+# Runtime dependencies for the router services (dev/test tools are in requirements.lock).
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.2
+starlette==1.10.0
+tldextract==5.4.0
+psutil==7.2.2
+numpy==2.5.4
+scikit-learn==1.9.1   # the model file is tied to this version
+scipy==1.18.1
+joblib==1.6.0
+threadpoolctl==3.7.0

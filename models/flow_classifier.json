@@ -1,0 +1,387 @@
+{
+  "name": "NetWatch flow classifier",
+  "algorithm": "HistGradientBoostingClassifier (gradient-boosted decision trees)",
+  "sklearn_version": "1.9.1",
+  "dataset": "CIC-IDS2017 MachineLearningCVE (Sharafaldin et al., ICISSP 2018)",
+  "features": [
+    "dst_port",
+    "fwd_pkts",
+    "bwd_pkts",
+    "fwd_payload",
+    "bwd_payload",
+    "fwd_mean",
+    "bwd_mean",
+    "bwd_fwd_ratio"
+  ],
+  "classes": [
+    "benign",
+    "dos",
+    "scan",
+    "brute_force",
+    "botnet"
+  ],
+  "label_map": {
+    "BENIGN": "benign",
+    "DoS Hulk": "dos",
+    "DoS GoldenEye": "dos",
+    "DoS slowloris": "dos",
+    "DoS Slowhttptest": "dos",
+    "DDoS": "dos",
+    "PortScan": "scan",
+    "FTP-Patator": "brute_force",
+    "SSH-Patator": "brute_force",
+    "Bot": "botnet"
+  },
+  "left_out": {
+    "Web Attack * (Brute Force, XSS, Sql Injection)": "not separable from browsing by flow statistics",
+    "Infiltration": "36 flows",
+    "Heartbleed": "11 flows"
+  },
+  "raw_label_counts": {
+    "BENIGN": 2273097,
+    "DDoS": 128027,
+    "PortScan": 158930,
+    "Bot": 1966,
+    "Infiltration": 36,
+    "Web Attack \u00ef\u00bf\u00bd Brute Force": 1507,
+    "Web Attack \u00ef\u00bf\u00bd XSS": 652,
+    "Web Attack \u00ef\u00bf\u00bd Sql Injection": 21,
+    "FTP-Patator": 7938,
+    "SSH-Patator": 5897,
+    "DoS slowloris": 5796,
+    "DoS Slowhttptest": 5499,
+    "DoS Hulk": 231073,
+    "DoS GoldenEye": 10293,
+    "Heartbleed": 11
+  },
+  "rows_loaded": 2828401,
+  "rows_after_dedupe": 1013914,
+  "train_rows": 811131,
+  "test_rows": 202783,
+  "iterations": 139,
+  "fit_seconds": 131.6,
+  "inference_us_per_flow": 55.82,
+  "test": {
+    "accuracy": 0.9788,
+    "macro_f1": 0.91,
+    "per_class": {
+      "benign": {
+        "precision": 0.9805,
+        "recall": 0.9846,
+        "f1-score": 0.9825,
+        "support": 120000.0
+      },
+      "dos": {
+        "precision": 0.9939,
+        "recall": 0.9855,
+        "f1-score": 0.9897,
+        "support": 62765.0
+      },
+      "scan": {
+        "precision": 0.9185,
+        "recall": 0.9261,
+        "f1-score": 0.9223,
+        "support": 18149.0
+      },
+      "brute_force": {
+        "precision": 0.9775,
+        "recall": 0.9676,
+        "f1-score": 0.9725,
+        "support": 1482.0
+      },
+      "botnet": {
+        "precision": 0.8165,
+        "recall": 0.5866,
+        "f1-score": 0.6827,
+        "support": 387.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        118153,
+        355,
+        1427,
+        14,
+        51
+      ],
+      [
+        908,
+        61857,
+        0,
+        0,
+        0
+      ],
+      [
+        1298,
+        25,
+        16807,
+        19,
+        0
+      ],
+      [
+        45,
+        0,
+        3,
+        1434,
+        0
+      ],
+      [
+        99,
+        0,
+        61,
+        0,
+        227
+      ]
+    ]
+  },
+  "operating_point": {
+    "min_confidence": 0.9,
+    "accuracy": 0.9597,
+    "macro_f1": 0.8444,
+    "benign_flows_misflagged": 0.00574,
+    "per_class": {
+      "benign": {
+        "precision": 0.9412,
+        "recall": 0.9943,
+        "f1-score": 0.967
+      },
+      "dos": {
+        "precision": 0.9985,
+        "recall": 0.9746,
+        "f1-score": 0.9864
+      },
+      "scan": {
+        "precision": 0.9531,
+        "recall": 0.6947,
+        "f1-score": 0.8037
+      },
+      "brute_force": {
+        "precision": 0.9978,
+        "recall": 0.9291,
+        "f1-score": 0.9623
+      },
+      "botnet": {
+        "precision": 0.9565,
+        "recall": 0.3411,
+        "f1-score": 0.5029
+      }
+    }
+  },
+  "permutation_importance": [
+    [
+      "dst_port",
+      0.5507
+    ],
+    [
+      "bwd_fwd_ratio",
+      0.2676
+    ],
+    [
+      "bwd_pkts",
+      0.2592
+    ],
+    [
+      "bwd_payload",
+      0.2531
+    ],
+    [
+      "fwd_payload",
+      0.2193
+    ],
+    [
+      "fwd_pkts",
+      0.207
+    ],
+    [
+      "bwd_mean",
+      0.1733
+    ],
+    [
+      "fwd_mean",
+      0.0883
+    ]
+  ],
+  "benign_median": {
+    "dst_port": 123.0,
+    "fwd_pkts": 2.0,
+    "bwd_pkts": 2.0,
+    "fwd_payload": 68.0,
+    "bwd_payload": 152.0,
+    "fwd_mean": 39.0,
+    "bwd_mean": 90.0,
+    "bwd_fwd_ratio": 1.0
+  },
+  "sha256": "1b169b5f27cd511c0f0aa7fc364425368ea09eb6e881419d03db5ff5896d1278",
+  "trained_at": "2026-11-21 13:28:59",
+  "lab_eval": [
+    {
+      "capture": "try.pcapng",
+      "contains": "6 min of real household Wi-Fi traffic",
+      "expected": "nothing",
+      "flows": 717,
+      "flows_flagged_by_ml": 55,
+      "flagged_share": 0.0767,
+      "ml_verdicts": {
+        "benign": 662,
+        "brute_force": 47,
+        "botnet": 8
+      },
+      "rule_alerts": [],
+      "ml_alerts": [],
+      "ml_second_opinions": [],
+      "ml_detected_expected": null,
+      "ml_false_alarm": false
+    },
+    {
+      "capture": "nmap_scan.pcapng",
+      "contains": "real nmap scans of the router",
+      "expected": "scan",
+      "flows": 2242,
+      "flows_flagged_by_ml": 1409,
+      "flagged_share": 0.6285,
+      "ml_verdicts": {
+        "scan": 1397,
+        "benign (low confidence)": 467,
+        "benign": 366,
+        "brute_force": 12
+      },
+      "rule_alerts": [
+        "port_scan"
+      ],
+      "ml_alerts": [],
+      "ml_second_opinions": [
+        {
+          "family": "scan",
+          "flows": 1397,
+          "agrees": true
+        }
+      ],
+      "ml_detected_expected": true,
+      "ml_false_alarm": null
+    },
+    {
+      "capture": "lab_host_sweep.pcap",
+      "contains": "synthetic host sweep",
+      "expected": "scan",
+      "flows": 30,
+      "flows_flagged_by_ml": 0,
+      "flagged_share": 0.0,
+      "ml_verdicts": {
+        "benign": 30
+      },
+      "rule_alerts": [
+        "host_sweep"
+      ],
+      "ml_alerts": [],
+      "ml_second_opinions": [],
+      "ml_detected_expected": false,
+      "ml_false_alarm": null
+    },
+    {
+      "capture": "lab_syn_flood.pcap",
+      "contains": "synthetic SYN flood",
+      "expected": "dos",
+      "flows": 500,
+      "flows_flagged_by_ml": 0,
+      "flagged_share": 0.0,
+      "ml_verdicts": {
+        "benign": 500
+      },
+      "rule_alerts": [
+        "syn_flood"
+      ],
+      "ml_alerts": [],
+      "ml_second_opinions": [],
+      "ml_detected_expected": false,
+      "ml_false_alarm": null
+    },
+    {
+      "capture": "lab_ssh_bruteforce.pcap",
+      "contains": "synthetic SSH password guessing",
+      "expected": "brute_force",
+      "flows": 40,
+      "flows_flagged_by_ml": 0,
+      "flagged_share": 0.0,
+      "ml_verdicts": {
+        "benign (low confidence)": 40
+      },
+      "rule_alerts": [
+        "brute_force"
+      ],
+      "ml_alerts": [],
+      "ml_second_opinions": [],
+      "ml_detected_expected": false,
+      "ml_false_alarm": null
+    },
+    {
+      "capture": "lab_phishing_visit.pcap",
+      "contains": "synthetic phishing visit",
+      "expected": "nothing",
+      "flows": 4,
+      "flows_flagged_by_ml": 0,
+      "flagged_share": 0.0,
+      "ml_verdicts": {
+        "benign": 4
+      },
+      "rule_alerts": [
+        "lab_domain"
+      ],
+      "ml_alerts": [],
+      "ml_second_opinions": [],
+      "ml_detected_expected": null,
+      "ml_false_alarm": false
+    },
+    {
+      "capture": "lab_lateral_probe.pcap",
+      "contains": "synthetic worm-style probing of 3 devices (below every rule)",
+      "expected": "scan",
+      "flows": 30,
+      "flows_flagged_by_ml": 15,
+      "flagged_share": 0.5,
+      "ml_verdicts": {
+        "scan": 15,
+        "benign": 12,
+        "benign (low confidence)": 3
+      },
+      "rule_alerts": [],
+      "ml_alerts": [
+        "ml_scan"
+      ],
+      "ml_second_opinions": [],
+      "ml_detected_expected": true,
+      "ml_false_alarm": null
+    }
+  ],
+  "beyond_rules": [
+    {
+      "scenario": "A full scan: 1,000 services on one device",
+      "cases": 2,
+      "rules": true,
+      "ml": true
+    },
+    {
+      "scenario": "The 20 most common services, on 1 to 9 devices",
+      "cases": 12,
+      "rules": true,
+      "ml": true
+    },
+    {
+      "scenario": "The 10 most common services, on one device",
+      "cases": 2,
+      "rules": false,
+      "ml": false
+    },
+    {
+      "scenario": "The 10 most common services, on 2 to 9 devices at once",
+      "cases": 8,
+      "rules": false,
+      "ml": true
+    },
+    {
+      "scenario": "The same, spread out over 10 minutes",
+      "cases": 2,
+      "rules": false,
+      "ml": false
+    }
+  ]
+}
